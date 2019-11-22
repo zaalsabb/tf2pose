@@ -1,0 +1,8 @@
+<launch>
+	<node name="tf2pose" pkg="tf2pose" type="tf2pose" output="screen">
+			<param name="tf_target_frame" value="odom"/>
+			<param name="tf_source_frame" value="base_link"/>
+			<param name="pose_frame_id" value="world"/>
+			<!--remap from="pose_topic" to="pose_topic"/-->
+		</node>
+</launch>
