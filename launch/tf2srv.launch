@@ -1,0 +1,5 @@
+<launch>
+	<node name="tf2srv" pkg="tf2pose" type="tf2srv" output="screen">
+		<param name="map_id" value="world"/>
+	</node>
+</launch>

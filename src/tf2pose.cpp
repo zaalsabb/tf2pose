@@ -14,16 +14,17 @@ int main(int argc, char** argv){
   string tf_source_frame = "base_link";
   string pose_frame_id = "world";
 
-  ros::param::get("tf2pose/tf_target_frame", tf_target_frame);
-  ros::param::get("tf2pose/tf_source_frame", tf_source_frame);
-  ros::param::get("tf2pose/pose_frame_id", pose_frame_id);
+  ros::param::get("tf2pose/frame_id", tf_source_frame);
+  ros::param::get("tf2pose/map_id", tf_target_frame);
+  pose_frame_id = tf_target_frame;
+  //ros::param::get("tf2pose/pose_frame_id", pose_frame_id);
 
-  ros::Publisher posePub = node.advertise<geometry_msgs::PoseStamped>("pose_topic", 10);
+  ros::Publisher posePub = node.advertise<geometry_msgs::PoseStamped>("/pose", 10);
 
   tf2_ros::Buffer tfBuffer;
   tf2_ros::TransformListener tfListener(tfBuffer);
 
-  ros::Rate rate(50.0);
+  ros::Rate rate(120.0);
   while (node.ok()){
     geometry_msgs::TransformStamped transformStamped;
     try{
@@ -32,7 +33,7 @@ int main(int argc, char** argv){
     }
     catch (tf2::TransformException &ex) {
       ROS_WARN("%s",ex.what());
-      ros::Duration(1.0).sleep();
+      rate.sleep();
       continue;
     }
 

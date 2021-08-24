@@ -1,8 +1,6 @@
 <launch>
 	<node name="tf2pose" pkg="tf2pose" type="tf2pose" output="screen">
-			<param name="tf_target_frame" value="map"/>
-			<param name="tf_source_frame" value="base_link"/>
-			<param name="pose_frame_id" value="map"/>
-			<remap from="pose_topic" to="pose"/>
-		</node>
+		<param name="map_id" value="world"/>
+		<param name="frame_id" value="F2_link"/>
+	</node>
 </launch>
